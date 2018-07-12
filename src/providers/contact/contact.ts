@@ -23,8 +23,7 @@ export class ContactProvider {
   }
 
   private save(key: string, contact: Contact) {
-    this.storage.set(key, contact);
-
+    return this.storage.set(key, contact);
   }
 
   public remove(key: string) {
@@ -34,23 +33,24 @@ export class ContactProvider {
   public getAll() {
     let contacts: ContactList[] = [];
     /*
+    // pode ser feito assim ou da outra maneira:
     this.storage.keys()
-    .then((keys: string[]) => {
-      this.storage.get();
-    });
+      .then((keys: string[]) => {
+        this.storage.get();
+      });
     */
-    this.storage.forEach((value: Contact, key: string, iterationNumber: Number) => {
+    return this.storage.forEach((value: Contact, key: string, iterationNumber: Number) => {
       let contact = new ContactList();
       contact.key = key;
       contact.contact = value;
       contacts.push(contact);
     })
-    .then(() => {
-      return Promise.resolve(contacts);
-    })
-    .catch((error) => {
-      return Promise.reject(error);
-    });
+      .then(() => {
+        return Promise.resolve(contacts);
+      })
+      .catch((error) => {
+        return Promise.reject(error);
+      });
   }
 
 }
