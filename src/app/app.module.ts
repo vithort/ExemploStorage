@@ -6,25 +6,34 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { DatePipe } from '@angular/common';
+import { IonicStorageModule } from '@ionic/storage';
+import { ContactProvider } from '../providers/contact/contact';
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp)
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    MyApp
+    ,HomePage
+  ]
+  ,imports: [
+    BrowserModule
+    ,IonicModule.forRoot(MyApp)
+    ,IonicStorageModule.forRoot()
+  ]
+  ,bootstrap: [IonicApp]
+  ,entryComponents: [
+    MyApp
+    ,HomePage
+  ]
+  ,providers: [
+    StatusBar
+    ,SplashScreen
+    ,{
+      provide: ErrorHandler
+      ,useClass: IonicErrorHandler
+    }
+    ,DatePipe
+    ,ContactProvider
   ]
 })
 export class AppModule {}
